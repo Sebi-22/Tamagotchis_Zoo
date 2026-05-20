@@ -151,17 +151,18 @@ const instTierra = new TamagotchiTierra("Tierra");
 const listaTamagotchis = [instFuego, instAgua, instTierra];
 let ambienteNocturno = false;
 
+// Dia o Noche
 function toggleAmbiente() {
   ambienteNocturno = !ambienteNocturno;
   document.getElementById("btn-toggle-time").innerText = ambienteNocturno ? "Cambiar a Día ☀️" : "Cambiar a Noche 🌙";
   renderTamagotchis();
 }
-
+// Mensajes en consola
 function logConsole(mensaje) {
   const consola = document.getElementById("event-console");
   consola.innerHTML += "<br>>> " + mensaje;
 }
-
+// Interración de Botones
 function animarBotonIcono(index, accion) {
   if (accion === 'jugar' && listaTamagotchis[index].especie === 'Agua') {
     listaTamagotchis[index].jugar(false);
@@ -170,7 +171,7 @@ function animarBotonIcono(index, accion) {
   }
   renderTamagotchis();
 }
-
+// ---RENDERIZADO  ---//
 function renderTamagotchis() {
   const wrapper = document.getElementById("zoo-wrapper");
   wrapper.innerHTML = "";
@@ -216,7 +217,6 @@ function renderTamagotchis() {
       </div>`;
   }
 }
-
 function ejecutarFiesta() {
   for (let i = 0; i < listaTamagotchis.length; i++) {
     const t = listaTamagotchis[i];
