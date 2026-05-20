@@ -9,7 +9,6 @@
   padding: 0;
   font-family: "Courier New", Courier, monospace;
 }
-
 body {
   background-color: var(--bg-dark);
   background-image: radial-gradient(circle at 50% 50%, #312e81, #1e1b4b);
@@ -22,33 +21,34 @@ body {
 header h1 {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 15px 0;
-  font-size: 2rem; 
+  font-size: 2rem; /* Tamaño adaptable */
   color: #fbbf24;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* --- CONTENEDOR PRINCIPAL RESPONSIVE --- */
+/* --- CONTENEDOR PRINCIPAL --- */
 .zoo-container {
   display: flex;
   flex-wrap: wrap; 
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch; /*strec */
   gap: 25px; 
   max-width: 1200px;
   margin: 0 auto 30px auto;
   padding: 10px;
 }
 
-/* Envoltura de cada Tamagotchi (Huevo + Panel de estadísticas) */
+/* Envoltura de cada Tamagotchi */
 .device-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 320px; /* No se estira más de esto, ideal para pantallas chicas */
+  max-width: 320px; 
+  height: 100%; 
 }
 
-/* --- ESTILOS DEL DISPOSITIVO FÍSICO (EL HUEVO) --- */
+/* --- ESTILOS DEL DISPOSITIVO FÍSICO  --- */
 .tamagotchi-egg {
   width: 260px;
   height: 350px;
@@ -65,15 +65,15 @@ header h1 {
   margin-bottom: 15px;
 }
 
-/* Colores por especie */
-.egg-ignis {
+/* Colores por especie (NOMBRES EN ESPAÑOL Y DEGRADADOS ACTUALIZADOS) */
+.egg-fuego {
   background: radial-gradient(circle at 30% 20%, #ff6b6b, #b90000);
 }
-.egg-aqua {
+.egg-agua {
   background: radial-gradient(circle at 30% 20%, #4facfe, #005be2);
 }
-.egg-umbra {
-  background: radial-gradient(circle at 30% 20%, #b35df8, #5b00b0);
+.egg-tierra {
+  background: radial-gradient(circle at 30% 20%, #b45309, #78350f);
 }
 
 /* Borde dorado de la pantalla */
@@ -86,7 +86,7 @@ header h1 {
     0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
-/* --- LA PANTALLA LCD --- */
+/* --- LA PANTALLA --- */
 .screen {
   width: 150px;
   height: 150px;
@@ -126,7 +126,7 @@ header h1 {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  color: #111111;
+  color: #111;
   opacity: 0.8;
   filter: grayscale(100%);
 }
@@ -205,6 +205,9 @@ header h1 {
   width: 100%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: left;
+  display: flex;          
+  flex-direction: column; 
+  flex-grow: 1;           
 }
 
 .stats-panel h3 {
@@ -238,24 +241,19 @@ header h1 {
   height: 100%;
   transition: width 0.3s ease;
 }
-.fill-h {
-  background-color: #ef4444;
-}
-.fill-e {
-  background-color: #eab308;
-}
-.fill-f {
-  background-color: #10b981;
-}
-.fill-s {
-  background-color: #ec4899;
-}
+
+/* COLORES DE BARRAS DE PROGRESO */
+.fill-h { background-color: #ef4444; } /* Hambre */
+.fill-e { background-color: #eab308; } /* Energía */
+.fill-f { background-color: #10b981; } /* Felicidad */
+.fill-s { background-color: #ec4899; } /* Salud */
+.fill-u { background-color: #a16207; } /* Defensa (Tierra) - Marrón/Roca */
 
 .extra-actions {
-  margin-top: 12px;
-  display: flex;
-  gap: 8px;
-  justify-content: center;
+.extra-actions {
+  margin-top: auto;
+  padding-top: 15px;
+}
 }
 
 .btn-small {
@@ -273,7 +271,7 @@ header h1 {
   background: #475569;
 }
 
-/* --- CONTROLES GLOBALES DEL ENTORNO --- */
+/* --- CONTROLES GLOBALES  --- */
 .global-controls {
   background: rgba(0, 0, 0, 0.3);
   padding: 15px;
@@ -318,9 +316,8 @@ header h1 {
   font-size: 0.85rem;
 }
 
-/* --- MEDIA QUERIES (MAGIA RESPONSIVE) --- */
+/* --- MEDIA QUERIES  --- */
 
-/* Para pantallas medianas (Tablets) */
 @media (min-width: 600px) {
   body {
     padding: 20px;
@@ -332,8 +329,6 @@ header h1 {
     padding: 20px;
   }
 }
-
-/* Para pantallas chicas / Celulares angostos: Ajustes finos de botones para que no se pisen */
 @media (max-width: 400px) {
   .global-controls button {
     width: 100%; /* Botones de ecosistema uno abajo del otro en pantallas diminutas */
