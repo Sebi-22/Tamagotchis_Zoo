@@ -14,11 +14,21 @@ class Tamagotchi {
     this.#salud = 100;
   }
 
-  get nombre() { return this.#nombre; }
-  get hambre() { return this.#hambre; }
-  get energia() { return this.#energia; }
-  get felicidad() { return this.#felicidad; }
-  get salud() { return this.#salud; }
+  get nombre() {
+    return this.#nombre;
+  }
+  get hambre() {
+    return this.#hambre;
+  }
+  get energia() {
+    return this.#energia;
+  }
+  get felicidad() {
+    return this.#felicidad;
+  }
+  get salud() {
+    return this.#salud;
+  }
 
   set hambre(valor) {
     if (valor > 100) this.#hambre = 100;
@@ -73,7 +83,11 @@ class Tamagotchi {
 }
 
 class TamagotchiFuego extends Tamagotchi {
-  constructor(nombre) { super(nombre); this.especie = "Fuego"; this.emoji = "🔥"; }
+  constructor(nombre) {
+    super(nombre);
+    this.especie = "Fuego";
+    this.emoji = "🔥";
+  }
   alimentar() {
     this.hambre -= 25;
     this.energia += 25;
@@ -98,7 +112,11 @@ class TamagotchiFuego extends Tamagotchi {
 }
 
 class TamagotchiAgua extends Tamagotchi {
-  constructor(nombre) { super(nombre); this.especie = "Agua"; this.emoji = "💧"; }
+  constructor(nombre) {
+    super(nombre);
+    this.especie = "Agua";
+    this.emoji = "💧";
+  }
   alimentar() {
     super.alimentar();
     this.salud += 15;
@@ -126,8 +144,15 @@ class TamagotchiAgua extends Tamagotchi {
 
 class TamagotchiTierra extends Tamagotchi {
   #defensa = 50;
-  constructor(nombre) { super(nombre); this.especie = "Tierra"; this.emoji = "🪨"; }
-  get defensa() { return this.#defensa; }
+  constructor(nombre,defensa) {
+    super(nombre);
+    this.especie = "Tierra";
+    this.emoji = "🪨";
+    this.#defensa = defensa;
+  }
+  get defensa() {
+    return this.#defensa;
+  }
   set defensa(valor) {
     if (valor > 100) this.#defensa = 100;
     else if (valor < 0) this.#defensa = 0;
@@ -154,7 +179,9 @@ let ambienteNocturno = false;
 // Dia o Noche
 function toggleAmbiente() {
   ambienteNocturno = !ambienteNocturno;
-  document.getElementById("btn-toggle-time").innerText = ambienteNocturno ? "Cambiar a Día ☀️" : "Cambiar a Noche 🌙";
+  document.getElementById("btn-toggle-time").innerText = ambienteNocturno
+    ? "Cambiar a Día ☀️"
+    : "Cambiar a Noche 🌙";
   renderTamagotchis();
 }
 // Mensajes en consola
@@ -164,7 +191,7 @@ function logConsole(mensaje) {
 }
 // Interración de Botones
 function animarBotonIcono(index, accion) {
-  if (accion === 'jugar' && listaTamagotchis[index].especie === 'Agua') {
+  if (accion === "jugar" && listaTamagotchis[index].especie === "Agua") {
     listaTamagotchis[index].jugar(false);
   } else {
     listaTamagotchis[index][accion]();
@@ -179,12 +206,16 @@ function renderTamagotchis() {
   for (let i = 0; i < listaTamagotchis.length; i++) {
     const t = listaTamagotchis[i];
     const isDead = t.estadoGeneral === "Apagado" || t.salud === 0;
-    
+
     let lineaDefensa = "";
     if (t.especie === "Tierra") {
-      lineaDefensa = '<div class="stat-line"><span>Defensa</span> <div class="bar-bg"><div class="bar-fill fill-u" style="width:' + t.defensa + '%"></div></div></div>';
+      lineaDefensa =
+        '<div class="stat-line"><span>Defensa</span> <div class="bar-bg"><div class="bar-fill fill-u" style="width:' +
+        t.defensa +
+        '%"></div></div></div>';
     } else {
-      lineaDefensa = '<div class="stat-line" style="visibility:hidden"><span>.</span></div>';
+      lineaDefensa =
+        '<div class="stat-line" style="visibility:hidden"><span>.</span></div>';
     }
 
     wrapper.innerHTML += `
