@@ -1,0 +1,349 @@
+/* --- VARIABLES Y CONFIGURACIÓN BASE --- */
+:root {
+  --bg-dark: #1e1b4b;
+  --text-light: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image: radial-gradient(circle at 50% 50%, #312e81, #1e1b4b);
+  color: var(--text-light);
+  padding: 10px; /* Menos padding en móviles para ganar espacio */
+  min-height: 100vh;
+  text-align: center;
+}
+
+header h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 15px 0;
+  font-size: 2rem; /* Tamaño adaptable */
+  color: #fbbf24;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* --- CONTENEDOR PRINCIPAL RESPONSIVE --- */
+.zoo-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos bajen si no entran de ancho */
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px; /* Espaciado entre dispositivos */
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+  padding: 10px;
+}
+
+/* Envoltura de cada Tamagotchi (Huevo + Panel de estadísticas) */
+.device-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 320px; /* No se estira más de esto, ideal para pantallas chicas */
+}
+
+/* --- ESTILOS DEL DISPOSITIVO FÍSICO (EL HUEVO) --- */
+.tamagotchi-egg {
+  width: 260px;
+  height: 350px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow:
+    inset -15px -15px 25px rgba(0, 0, 0, 0.6),
+    inset 10px 10px 20px rgba(255, 255, 255, 0.4),
+    10px 15px 25px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 55px;
+  margin-bottom: 15px;
+}
+
+/* Colores por especie */
+.egg-ignis {
+  background: radial-gradient(circle at 30% 20%, #ff6b6b, #b90000);
+}
+.egg-aqua {
+  background: radial-gradient(circle at 30% 20%, #4facfe, #005be2);
+}
+.egg-umbra {
+  background: radial-gradient(circle at 30% 20%, #b35df8, #5b00b0);
+}
+
+/* Borde dorado de la pantalla */
+.golden-frame {
+  background: linear-gradient(135deg, #fcd34d, #b45309, #fcd34d);
+  padding: 8px;
+  border-radius: 15px;
+  box-shadow:
+    inset 0 0 5px rgba(0, 0, 0, 0.5),
+    0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* --- LA PANTALLA LCD --- */
+.screen {
+  width: 150px;
+  height: 150px;
+  background-color: #fdf6e3;
+  background-image:
+    linear-gradient(
+      45deg,
+      #a6d0c4 25%,
+      transparent 25%,
+      transparent 75%,
+      #a6d0c4 75%,
+      #a6d0c4
+    ),
+    linear-gradient(
+      45deg,
+      #a6d0c4 25%,
+      transparent 25%,
+      transparent 75%,
+      #a6d0c4 75%,
+      #a6d0c4
+    );
+  background-size: 30px 30px;
+  background-position:
+    0 0,
+    15px 15px;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.screen-icons {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #111;
+  opacity: 0.8;
+  filter: grayscale(100%);
+}
+
+.character {
+  font-size: 3rem;
+  text-align: center;
+  margin: auto;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.screen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(166, 208, 196, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #111;
+  z-index: 10;
+  display: none;
+}
+
+.screen-overlay.visible {
+  display: flex;
+}
+
+/* --- BOTONES DE HARDWARE --- */
+.hardware-buttons {
+  display: flex;
+  gap: 15px;
+  position: absolute;
+  bottom: 35px;
+}
+
+.hw-btn {
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle at 30% 30%, #fef08a, #ca8a04);
+  border-radius: 50%;
+  border: none;
+  box-shadow:
+    inset -2px -2px 5px rgba(0, 0, 0, 0.3),
+    3px 3px 6px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.hw-btn:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+    1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* --- PANEL DE ESTADÍSTICAS E INTERFAZ EXTERNA --- */
+.stats-panel {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid #475569;
+  border-radius: 12px;
+  padding: 15px;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
+}
+
+.stats-panel h3 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #475569;
+  padding-bottom: 5px;
+}
+
+.status-label {
+  font-weight: normal;
+  float: right;
+}
+
+.stat-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.bar-bg {
+  width: 55%; /* Ajustado ligeramente para dar aire al texto en pantallas chicas */
+  background-color: #334155;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  align-self: center;
+}
+
+.bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+.fill-h {
+  background-color: #ef4444;
+}
+.fill-e {
+  background-color: #eab308;
+}
+.fill-f {
+  background-color: #10b981;
+}
+.fill-s {
+  background-color: #ec4899;
+}
+
+.extra-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-small {
+  background: #334155;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  flex: 1; /* Hace que los botones individuales midan lo mismo */
+  text-align: center;
+}
+.btn-small:hover {
+  background: #475569;
+}
+
+/* --- CONTROLES GLOBALES DEL ENTORNO --- */
+.global-controls {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 1px solid #334155;
+  width: 100%;
+}
+
+.global-controls h3 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 10px;
+}
+
+.global-controls button {
+  background: #fbbf24;
+  color: #1e1b4b;
+  font-weight: bold;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.global-controls button:hover {
+  background: #f59e0b;
+}
+
+.console-log {
+  background: #000;
+  color: #34d399;
+  font-family: monospace;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+  height: 100px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+/* --- MEDIA QUERIES (MAGIA RESPONSIVE) --- */
+
+/* Para pantallas medianas (Tablets) */
+@media (min-width: 600px) {
+  body {
+    padding: 20px;
+  }
+  header h1 {
+    font-size: 2.5rem;
+  }
+  .global-controls {
+    padding: 20px;
+  }
+}
+
+/* Para pantallas chicas / Celulares angostos: Ajustes finos de botones para que no se pisen */
+@media (max-width: 400px) {
+  .global-controls button {
+    width: 100%; /* Botones de ecosistema uno abajo del otro en pantallas diminutas */
+    margin: 5px 0;
+  }
+  .stat-line {
+    font-size: 0.8rem;
+  }
+  .bar-bg {
+    width: 50%;
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoo Elemental - Tamagotchi Clásico</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Zoo Elemental</h1>
+    </header>
+
+    <div class="zoo-container" id="zoo-wrapper">
+        </div>
+
+    <section class="global-controls">
+        <h3>Interacciones del Ecosistema</h3>
+        <button onclick="toggleAmbiente()" id="btn-toggle-time">Cambiar a Noche 🌙</button>
+        <button onclick="ejecutarFiesta()">🎉 Fiesta Elemental</button>
+        <button onclick="ejecutarDuelo()">⚔️ Duelo Amistoso</button>
+        <button onclick="ejecutarRitual()">🔮 Ritual (Aqua)</button>
+        <div class="console-log" id="event-console">
+            >> Sistema Tamagotchi inicializado...
+        </div>
+    </section>
+
+   <script src="assets/js/script.js"></script>
+</body>
+</html>
