@@ -169,6 +169,7 @@ class TamagotchiTierra extends Tamagotchi {
     logConsole("🪨 " + this.nombre + " se enterró a descansar.");
   }
 }
+
 // --- 2. GESTIÓN E INTERFAZ ---
 const instFuego = new TamagotchiFuego("Fuego");
 const instAgua = new TamagotchiAgua("Agua");
@@ -184,11 +185,13 @@ function toggleAmbiente() {
     : "Cambiar a Noche 🌙";
   renderTamagotchis();
 }
+
 // Mensajes en consola
 function logConsole(mensaje) {
   const consola = document.getElementById("event-console");
   consola.innerHTML += "<br>>> " + mensaje;
 }
+
 // Interración de Botones
 function animarBotonIcono(index, accion) {
   if (accion === "jugar" && listaTamagotchis[index].especie === "Agua") {
@@ -198,6 +201,7 @@ function animarBotonIcono(index, accion) {
   }
   renderTamagotchis();
 }
+
 // ---RENDERIZADO  ---//
 function renderTamagotchis() {
   const wrapper = document.getElementById("zoo-wrapper");
@@ -248,6 +252,7 @@ function renderTamagotchis() {
       </div>`;
   }
 }
+
 function ejecutarFiesta() {
   for (let i = 0; i < listaTamagotchis.length; i++) {
     const t = listaTamagotchis[i];
@@ -270,3 +275,30 @@ function ejecutarRitual() {
 }
 
 renderTamagotchis();
+
+// Mostrar el modal
+function abrirAdopcion() {
+  document.getElementById("modal-adopcion").style.display = "block";
+}
+
+// Ocultar el modal
+function cerrarModal() {
+  document.getElementById("modal-adopcion").style.display = "none";
+}
+
+// Lógica de creación (la "magia" de la instancia)
+function adopcionConfirmada(especie) {
+  let nombre = prompt("¿Cómo se llamará tu nuevo amigo?");
+  if (nombre) {
+    let nuevoTamagotchi;
+    
+    if (especie === "Fuego") nuevoTamagotchi = new TamagotchiFuego(nombre);
+    else if (especie === "Agua") nuevoTamagotchi = new TamagotchiAgua(nombre);
+    else nuevoTamagotchi = new TamagotchiTierra(nombre);
+    
+    listaTamagotchis.push(nuevoTamagotchi);
+    cerrarModal();
+    renderTamagotchis();
+    logConsole("✨ ¡Un nuevo " + especie + " ha llegado al zoo!");
+  }
+}

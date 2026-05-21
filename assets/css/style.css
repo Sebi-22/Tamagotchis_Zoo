@@ -250,12 +250,11 @@ header h1 {
 .fill-u { background-color: #a16207; } /* Defensa (Tierra) - Marrón/Roca */
 
 .extra-actions {
-.extra-actions {
   margin-top: auto;
   padding-top: 15px;
+  display: flex;
+  gap: 5px;
 }
-}
-
 .btn-small {
   background: #334155;
   color: white;
@@ -315,7 +314,50 @@ header h1 {
   text-align: left;
   font-size: 0.85rem;
 }
+/* Estilos para el Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+}
 
+.modal-content {
+  background: #1e1b4b;
+  border: 2px solid #fbbf24;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 15px;
+  color: white;
+}
+
+.opciones-adopcion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.opciones-adopcion button {
+  background: #334155;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: #ef4444 !important;
+  color: white;
+  margin-top: 10px;
+}
 /* --- MEDIA QUERIES  --- */
 
 @media (min-width: 600px) {

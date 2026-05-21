@@ -11,18 +11,32 @@
       <h1>Zoo Elemental</h1>
     </header>
     <div class="zoo-container" id="zoo-wrapper"></div>
-    <section class="global-controls">
+   <section class="global-controls">
       <h3>Interacciones del Ecosistema</h3>
-      <button onclick="toggleAmbiente()" id="btn-toggle-time">
-        Cambiar a Noche 🌙
-      </button>
+      <button onclick="toggleAmbiente()" id="btn-toggle-time">Cambiar a Noche 🌙</button>
       <button onclick="ejecutarFiesta()">🎉 Fiesta Elemental</button>
       <button onclick="ejecutarDuelo()">⚔️ Duelo Amistoso</button>
       <button onclick="ejecutarRitual()">🔮 Ritual</button>
-      <div class="console-log" id="event-console">
-        >> Sistema Tamagotchi inicializado...
-      </div>
+      <button onclick="abrirAdopcion()">➕ Adoptar Nuevo</button>
+      <div class="console-log" id="event-console">>> Sistema Tamagotchi inicializado...</div>
     </section>
+
+    <div id="modal-adopcion" class="modal">
+      <div class="modal-content">
+        <h2>¡Adopta un nuevo elemento!</h2>
+        <div class="opciones-adopcion">
+          <button onclick="adopcionConfirmada('Fuego')">🔥 Fuego</button>
+          <button onclick="adopcionConfirmada('Agua')">💧 Agua</button>
+          <button onclick="adopcionConfirmada('Tierra')">🪨 Tierra</button>
+        </div>
+        <button onclick="cerrarModal()" class="btn-cancel">Cancelar</button>
+      </div>
+    </div>
+
+<section class="global-controls">
+  <h3>Interacciones del Ecosistema</h3>
+  <button onclick="abrirAdopcion()">➕ Adoptar Nuevo</button>
+  </section>
 
     <script src="assets/js/script.js"></script>
   </body>
