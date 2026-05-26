@@ -1,6 +1,4 @@
-/* ==========================================================================
-   1. ESTILOS GENERALES (BASE)
-   ========================================================================== */
+/* 1. ESTILOS GENERALES (BASE) */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -32,9 +30,7 @@ header .subtitle {
 }
 
 
-/* ==========================================================================
-   2. CONTENEDOR DE TAMAGOTCHIS (GRID RESPONSIVE AUTOMÁTICO)
-   ========================================================================== */
+/* 2. CONTENEDOR DE TAMAGOTCHIS (GRID RESPONSIVE AUTOMÁTICO) */
 .zoo-container {
     display: grid;
     /* Esto hace que si entran 3 tarjetas se pongan en fila, y si no hay espacio bajen solas */
@@ -45,9 +41,7 @@ header .subtitle {
 }
 
 
-/* ==========================================================================
-   3. TARJETA INDIVIDUAL DE CRIATURA
-   ========================================================================== */
+/* 3. TARJETA INDIVIDUAL DE CRIATURA*/
 .tamagotchi-card {
     background-color: #1e293b; /* Gris azulado para los paneles */
     border-radius: 15px;
@@ -87,9 +81,7 @@ header .subtitle {
 .badge-tierra { background-color: #4ade80; }
 
 
-/* ==========================================================================
-   4. CONTENEDOR PARA LAS IMÁGENES DE TUS PERSONAJES
-   ========================================================================== */
+/* 4. CONTENEDOR PARA LAS IMÁGENES DE TUS PERSONAJES*/
 .sprite-container {
     background-color: #020617; /* Fondo negro para que resalte la foto */
     border-radius: 10px;
@@ -115,9 +107,7 @@ header .subtitle {
 }
 
 
-/* ==========================================================================
-   5. BARRAS DE ESTADÍSTICAS (PROGRESO)
-   ========================================================================== */
+/* 5. BARRAS DE ESTADÍSTICAS (PROGRESO) */
 .stats-panel {
     background-color: #0f172a;
     border-radius: 10px;
@@ -162,9 +152,7 @@ header .subtitle {
 .bar-salud { background-color: #22c55e; }     /* Verde */
 
 
-/* ==========================================================================
-   6. BOTONES DE ACCIÓN INDIVIDUAL
-   ========================================================================== */
+/* 6. BOTONES DE ACCIÓN INDIVIDUAL*/
 .actions-panel {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Dos botones por fila */
@@ -346,9 +334,7 @@ body.modo-noche {
 }
 
 
-/* ==========================================================================
-   9. MEDIA QUERY (MECANISMO RESPONSIVE PARA CELULARES)
-   ========================================================================== */
+/* 9. MEDIA QUERY  */
 @media (max-width: 600px) {
     body {
         padding: 10px; /* Menos margen en celulares */
