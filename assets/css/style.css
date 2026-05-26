@@ -1,343 +1,369 @@
-/* --- VARIABLES Y CONFIGURACIÓN BASE --- */
-:root {
-  --bg-dark: #1e1b4b;
-  --text-light: #f8fafc;
-}
+/* ==========================================================================
+   1. ESTILOS GENERALES (BASE)
+   ========================================================================== */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Courier New", Courier, monospace;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 body {
-  background-color: var(--bg-dark);
-  background-image: radial-gradient(circle at 50% 50%, #312e81, #1e1b4b);
-  color: var(--text-light);
-  padding: 10px; 
-  min-height: 100vh;
-  text-align: center;
+    background-color: #1e1b4b; /* Azul oscuro de fondo */
+    color: #f8fafc;            /* Texto claro */
+    padding: 20px;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
 header h1 {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 15px 0;
-  font-size: 2rem; /* Tamaño adaptable */
-  color: #fbbf24;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 40px;
+    color: #fbbf24; /* Color amarillo/dorado */
+    margin-bottom: 5px;
 }
 
-/* --- CONTENEDOR PRINCIPAL --- */
+header .subtitle {
+    color: #94a3b8;
+    font-size: 16px;
+}
+
+
+/* ==========================================================================
+   2. CONTENEDOR DE TAMAGOTCHIS (GRID RESPONSIVE AUTOMÁTICO)
+   ========================================================================== */
 .zoo-container {
-  display: flex;
-  flex-wrap: wrap; 
-  justify-content: center;
-  align-items: stretch; /*strec */
-  gap: 25px; 
-  max-width: 1200px;
-  margin: 0 auto 30px auto;
-  padding: 10px;
+    display: grid;
+    /* Esto hace que si entran 3 tarjetas se pongan en fila, y si no hay espacio bajen solas */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
 }
 
-/* Envoltura de cada Tamagotchi */
-.device-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 320px; 
-  height: 100%; 
+
+/* ==========================================================================
+   3. TARJETA INDIVIDUAL DE CRIATURA
+   ========================================================================== */
+.tamagotchi-card {
+    background-color: #1e293b; /* Gris azulado para los paneles */
+    border-radius: 15px;
+    padding: 20px;
+    border: 2px solid #475569; /* Borde gris normal */
+    text-align: center;
 }
 
-/* --- ESTILOS DEL DISPOSITIVO FÍSICO  --- */
-.tamagotchi-egg {
-  width: 260px;
-  height: 350px;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  box-shadow:
-    inset -15px -15px 25px rgba(0, 0, 0, 0.6),
-    inset 10px 10px 20px rgba(255, 255, 255, 0.4),
-    10px 15px 25px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-top: 55px;
-  margin-bottom: 15px;
+/* Colores específicos de bordes según el elemento (Para tus subclases) */
+.card-fuego { border-color: #f97316; } /* Naranja */
+.card-agua { border-color: #38bdf8; }  /* Celeste */
+.card-tierra { border-color: #4ade80; } /* Verde */
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #475569;
+    padding-bottom: 10px;
 }
 
-/* Colores por especie (NOMBRES EN ESPAÑOL Y DEGRADADOS ACTUALIZADOS) */
-.egg-fuego {
-  background: radial-gradient(circle at 30% 20%, #ff6b6b, #b90000);
-}
-.egg-agua {
-  background: radial-gradient(circle at 30% 20%, #4facfe, #005be2);
-}
-.egg-tierra {
-  background: radial-gradient(circle at 30% 20%, #b45309, #78350f);
+.card-header h3 {
+    font-size: 20px;
 }
 
-/* Borde dorado de la pantalla */
-.golden-frame {
-  background: linear-gradient(135deg, #fcd34d, #b45309, #fcd34d);
-  padding: 8px;
-  border-radius: 15px;
-  box-shadow:
-    inset 0 0 5px rgba(0, 0, 0, 0.5),
-    0 5px 10px rgba(0, 0, 0, 0.4);
+/* Etiquetas de tipo */
+.badge {
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+}
+.badge-fuego { background-color: #f97316; }
+.badge-agua { background-color: #38bdf8; }
+.badge-tierra { background-color: #4ade80; }
+
+
+/* ==========================================================================
+   4. CONTENEDOR PARA LAS IMÁGENES DE TUS PERSONAJES
+   ========================================================================== */
+.sprite-container {
+    background-color: #020617; /* Fondo negro para que resalte la foto */
+    border-radius: 10px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
 }
 
-/* --- LA PANTALLA --- */
-.screen {
-  width: 150px;
-  height: 150px;
-  background-color: #fdf6e3;
-  background-image:
-    linear-gradient(
-      45deg,
-      #a6d0c4 25%,
-      transparent 25%,
-      transparent 75%,
-      #a6d0c4 75%,
-      #a6d0c4
-    ),
-    linear-gradient(
-      45deg,
-      #a6d0c4 25%,
-      transparent 25%,
-      transparent 75%,
-      #a6d0c4 75%,
-      #a6d0c4
-    );
-  background-size: 30px 30px;
-  background-position:
-    0 0,
-    15px 15px;
-  border: 3px solid #1a1a1a;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 5px;
-  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.3);
-  position: relative;
+.tamagotchi-sprite {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 5px;
 }
 
-.screen-icons {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: #111;
-  opacity: 0.8;
-  filter: grayscale(100%);
+.status-indicator {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #fbbf24;
+    font-weight: bold;
 }
 
-.character {
-  font-size: 3rem;
-  text-align: center;
-  margin: auto;
-  animation: bounce 2s infinite;
-}
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.screen-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(166, 208, 196, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color: #111;
-  z-index: 10;
-  display: none;
-}
-
-.screen-overlay.visible {
-  display: flex;
-}
-
-/* --- BOTONES DE HARDWARE --- */
-.hardware-buttons {
-  display: flex;
-  gap: 15px;
-  position: absolute;
-  bottom: 35px;
-}
-
-.hw-btn {
-  width: 28px;
-  height: 28px;
-  background: radial-gradient(circle at 30% 30%, #fef08a, #ca8a04);
-  border-radius: 50%;
-  border: none;
-  box-shadow:
-    inset -2px -2px 5px rgba(0, 0, 0, 0.3),
-    3px 3px 6px rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-  transition: transform 0.1s;
-}
-
-.hw-btn:active {
-  transform: translateY(3px);
-  box-shadow:
-    inset 2px 2px 5px rgba(0, 0, 0, 0.5),
-    1px 1px 2px rgba(0, 0, 0, 0.6);
-}
-
-/* --- PANEL DE ESTADÍSTICAS E INTERFAZ EXTERNA --- */
+/* ==========================================================================
+   5. BARRAS DE ESTADÍSTICAS (PROGRESO)
+   ========================================================================== */
 .stats-panel {
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid #475569;
-  border-radius: 12px;
-  padding: 15px;
-  width: 100%;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  text-align: left;
-  display: flex;          
-  flex-direction: column; 
-  flex-grow: 1;           
+    background-color: #0f172a;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    text-align: left;
 }
 
-.stats-panel h3 {
-  margin-bottom: 10px;
-  border-bottom: 1px solid #475569;
-  padding-bottom: 5px;
+.stat-row {
+    margin-bottom: 10px;
 }
 
-.status-label {
-  font-weight: normal;
-  float: right;
+.stat-row:last-child {
+    margin-bottom: 0;
 }
 
-.stat-line {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 0.85rem;
+.stat-row label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 4px;
 }
 
-.bar-bg {
-  width: 55%; /* Ajustado ligeramente para dar aire al texto en pantallas chicas */
-  background-color: #334155;
-  height: 10px;
-  border-radius: 5px;
-  overflow: hidden;
-  align-self: center;
+.bar-container {
+    background-color: #475569; /* Color de barra vacía */
+    border-radius: 5px;
+    height: 10px;
+    width: 100%;
 }
 
-.bar-fill {
-  height: 100%;
-  transition: width 0.3s ease;
+.bar {
+    height: 100%;
+    border-radius: 5px;
+    width: 0%; /* El JS se encarga de cambiar este porcentaje */
 }
 
-/* COLORES DE BARRAS DE PROGRESO */
-.fill-h { background-color: #ef4444; } /* Hambre */
-.fill-e { background-color: #eab308; } /* Energía */
-.fill-f { background-color: #10b981; } /* Felicidad */
-.fill-s { background-color: #ec4899; } /* Salud */
-.fill-u { background-color: #a16207; } /* Defensa (Tierra) - Marrón/Roca */
+/* Colores planos para el rellenado de las barras */
+.bar-hambre { background-color: #ef4444; }    /* Rojo */
+.bar-energia { background-color: #fbbf24; }   /* Amarillo */
+.bar-felicidad { background-color: #38bdf8; } /* Azul/Celeste */
+.bar-salud { background-color: #22c55e; }     /* Verde */
 
-.extra-actions {
-.extra-actions {
-  margin-top: auto;
-  padding-top: 15px;
-}
-}
 
-.btn-small {
-  background: #334155;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  flex: 1; /* Hace que los botones individuales midan lo mismo */
-  text-align: center;
-}
-.btn-small:hover {
-  background: #475569;
+/* ==========================================================================
+   6. BOTONES DE ACCIÓN INDIVIDUAL
+   ========================================================================== */
+.actions-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos botones por fila */
+    gap: 8px;
 }
 
-/* --- CONTROLES GLOBALES  --- */
+.btn-action {
+    background-color: #334155;
+    color: #ffffff;
+    border: 1px solid #475569;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.btn-action:hover {
+    background-color: #475569;
+}
+
+/* Botón especial para eliminar/liberar */
+.btn-delete {
+    grid-column: span 2; /* Ocupa las dos columnas de ancho */
+    background-color: #b91c1c;
+    color: #ffffff;
+    border: none;
+    margin-top: 5px;
+}
+
+.btn-delete:hover {
+    background-color: #ef4444;
+}
+
+
+/* ==========================================================================
+   7. CONTROLES GENERALES (ECOSISTEMA INTERACTIVO) Y CONSOLA
+   ========================================================================== */
 .global-controls {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 15px;
-  border-radius: 12px;
-  max-width: 1000px;
-  margin: 0 auto;
-  border: 1px solid #334155;
-  width: 100%;
+    background-color: #1e293b;
+    border-radius: 15px;
+    border: 1px solid #475569;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .global-controls h3 {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #fbbf24;
 }
 
-.global-controls button {
-  background: #fbbf24;
-  color: #1e1b4b;
-  font-weight: bold;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 5px;
-  font-size: 0.9rem;
-  transition: background 0.2s;
-}
-.global-controls button:hover {
-  background: #f59e0b;
+.buttons-group {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones bajen si no entran en el ancho */
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
+.btn-global {
+    background-color: #312e81;
+    color: #ffffff;
+    border: 1px solid #4338ca;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-global:hover {
+    background-color: #4338ca;
+}
+
+.btn-adoptar {
+    background-color: #fbbf24;
+    color: #000000;
+    border: none;
+}
+
+.btn-adoptar:hover {
+    background-color: #f59e0b;
+}
+
+/* Modo Nocturno */
+body.modo-noche {
+    background-color: #020617;
+}
+
+/* Consola de Logs estilo terminal */
 .console-log {
-  background: #000;
-  color: #34d399;
-  font-family: monospace;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 15px;
-  height: 100px;
-  overflow-y: auto;
-  text-align: left;
-  font-size: 0.85rem;
+    background-color: #000000;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px;
+    height: 100px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 13px;
+    color: #34d399; /* Verde fósforo */
+    text-align: left;
 }
 
-/* --- MEDIA QUERIES  --- */
-
-@media (min-width: 600px) {
-  body {
-    padding: 20px;
-  }
-  header h1 {
-    font-size: 2.5rem;
-  }
-  .global-controls {
-    padding: 20px;
-  }
+.console-line {
+    display: block;
+    margin-bottom: 4px;
 }
-@media (max-width: 400px) {
-  .global-controls button {
-    width: 100%; /* Botones de ecosistema uno abajo del otro en pantallas diminutas */
-    margin: 5px 0;
-  }
-  .stat-line {
-    font-size: 0.8rem;
-  }
-  .bar-bg {
-    width: 50%;
-  }
+
+
+/* ==========================================================================
+   8. VENTANA MODAL (MENÚ DE ADOPCIÓN)
+   ========================================================================== */
+.modal {
+    display: none; /* Se activa desde JavaScript */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro transparente */
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #1e293b;
+    border: 2px solid #fbbf24;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 360px;
+    margin: 15% auto;
+    padding: 25px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #fbbf24;
+}
+
+.modal-content p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.opciones-adopcion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-select-element {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    color: #000000;
+}
+
+.btn-fuego-select { background-color: #f97316; }
+.btn-agua-select { background-color: #38bdf8; }
+.btn-tierra-select { background-color: #4ade80; }
+
+.btn-cancelar {
+    background-color: transparent;
+    color: #94a3b8;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.btn-cancelar:hover {
+    color: #ffffff;
+}
+
+
+/* ==========================================================================
+   9. MEDIA QUERY (MECANISMO RESPONSIVE PARA CELULARES)
+   ========================================================================== */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Menos margen en celulares */
+    }
+
+    header h1 {
+        font-size: 30px; /* Título más chico en pantallas chicas */
+    }
+
+    .buttons-group {
+        flex-direction: column; /* Los botones del sistema se apilan uno abajo del otro */
+    }
+
+    .btn-global {
+        width: 100%; /* Botones a lo ancho de la pantalla táctil */
+        text-align: center;
+    }
 }
