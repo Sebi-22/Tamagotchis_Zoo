@@ -1,53 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zoo Elemental - Tamagotchi</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
     <header>
-        <h1>Zoo Elemental</h1>
-        <p class="subtitle">Panel de Control y Hábitat de Criaturas</p>
+      <h1>Zoo Elemental</h1>
+      <p class="subtitle">Panel de Control y Hábitat de Criaturas</p>
     </header>
 
     <main class="game-layout">
+      <section class="zoo-container" id="zoo-wrapper"></section>
 
-        <section class="zoo-container" id="zoo-wrapper"></section>
-
-        <section class="global-controls">
-            <h3>Interacciones del Ecosistema</h3>
-            <div class="buttons-group">
-                <button onclick="toggleAmbiente()" id="btn-toggle-time" class="btn-global">🌙 Cambiar a Noche</button>
-                <button onclick="ejecutarFiesta()" class="btn-global">🎉 Fiesta Elemental</button>
-                <button onclick="ejecutarDuelo()" class="btn-global">⚔️ Duelo Amistoso</button>
-                <button onclick="ejecutarRitual()" class="btn-global">🔮 Ritual Curativo</button>
-                <button onclick="ejecutarCarrera()" class="btn-global">🏁 Carrera Elemental</button>
-                <button onclick="abrirAdopcion()" class="btn-global btn-adoptar">➕ Adoptar Criatura</button>
-            </div>
-            <div class="console-log" id="event-console">
-                <span class="console-line">>> Sistema Tamagotchi inicializado con éxito...</span>
-            </div>
-        </section>
+      <section class="global-controls">
+        <h3>Interacciones del Ecosistema</h3>
+        <div class="buttons-group">
+          <button
+            onclick="toggleAmbiente()"
+            id="btn-toggle-time"
+            class="btn-global"
+          >
+            🌙 Cambiar a Noche
+          </button>
+          <button onclick="ejecutarFiesta()" class="btn-global">
+            🎉 Fiesta Elemental
+          </button>
+          <button onclick="ejecutarDuelo()" class="btn-global">
+            ⚔️ Duelo Amistoso
+          </button>
+          <button onclick="ejecutarRitual()" class="btn-global">
+            🔮 Ritual Curativo
+          </button>
+          <button onclick="ejecutarCarrera()" class="btn-global">
+            🏁 Carrera Elemental
+          </button>
+          <button onclick="abrirAdopcion()" class="btn-global btn-adoptar">
+            ➕ Adoptar Criatura
+          </button>
+        </div>
+        <div class="console-log" id="event-console">
+          <span class="console-line"
+            >>> Sistema Tamagotchi inicializado con éxito...</span
+          >
+        </div>
+      </section>
     </main>
 
     <!-- Modal de adopción -->
     <div id="modal-adopcion" class="modal">
-        <div class="modal-content">
-            <h2>¡Adopta un nuevo elemento!</h2>
-            <p>Selecciona la especie para invocar al huevo elemental:</p>
-            <div class="opciones-adopcion">
-                <button onclick="adopcionConfirmada('Fuego')" class="btn-select-element btn-fuego-select">🔥 Especie Fuego</button>
-                <button onclick="adopcionConfirmada('Agua')"  class="btn-select-element btn-agua-select">💧 Especie Agua</button>
-                <button onclick="adopcionConfirmada('Tierra')" class="btn-select-element btn-tierra-select">🪨 Especie Tierra</button>
-            </div>
-            <button onclick="cerrarModal()" class="btn-cancelar">Volver al Zoo</button>
+      <div class="modal-content">
+        <h2>¡Adopta un nuevo elemento!</h2>
+        <p>Selecciona la especie para invocar al huevo elemental:</p>
+        <div class="opciones-adopcion">
+          <button
+            onclick="adopcionConfirmada('Fuego')"
+            class="btn-select-element btn-fuego-select"
+          >
+            🔥 Especie Fuego
+          </button>
+          <button
+            onclick="adopcionConfirmada('Agua')"
+            class="btn-select-element btn-agua-select"
+          >
+            💧 Especie Agua
+          </button>
+          <button
+            onclick="adopcionConfirmada('Tierra')"
+            class="btn-select-element btn-tierra-select"
+          >
+            🪨 Especie Tierra
+          </button>
         </div>
+        <button onclick="cerrarModal()" class="btn-cancelar">
+          Volver al Zoo
+        </button>
+      </div>
     </div>
 
-
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>

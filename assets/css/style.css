@@ -47,9 +47,15 @@ header .subtitle {
   text-align: center;
 }
 
-.card-fuego   { border-color: #f97316; }
-.card-agua    { border-color: #38bdf8; }
-.card-tierra { border-color: #4ade80; }
+.card-fuego {
+  border-color: #f97316;
+}
+.card-agua {
+  border-color: #38bdf8;
+}
+.card-tierra {
+  border-color: #4ade80;
+}
 
 .card-header {
   display: flex;
@@ -72,9 +78,15 @@ header .subtitle {
   font-weight: bold;
   color: #000000;
 }
-.badge-fuego  { background-color: #f97316; }
-.badge-agua   { background-color: #38bdf8; }
-.badge-tierra { background-color: #4ade80; }
+.badge-fuego {
+  background-color: #f97316;
+}
+.badge-agua {
+  background-color: #38bdf8;
+}
+.badge-tierra {
+  background-color: #4ade80;
+}
 
 /* 5. SPRITE */
 .sprite-container {
@@ -105,17 +117,17 @@ header .subtitle {
 .stats-panel {
   background-color: #0f172a;
   border-radius: 10px;
-  padding: 15px;            
+  padding: 15px;
   margin-bottom: 15px;
   text-align: left;
-  height: 180px;             
+  height: 180px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .stat-row {
-  margin-bottom: 0;          
+  margin-bottom: 0;
   width: 100%;
 }
 
@@ -131,7 +143,7 @@ header .subtitle {
   background-color: #475569;
   border-radius: 5px;
   height: 10px;
-  width: 100%;            
+  width: 100%;
 }
 
 .bar {
@@ -141,14 +153,22 @@ header .subtitle {
   transition: width 0.4s ease;
 }
 
-.bar-hambre    { background-color: #ef4444; }
-.bar-energia   { background-color: #fbbf24; }
-.bar-felicidad { background-color: #38bdf8; }
-.bar-salud     { background-color: #22c55e; }
+.bar-hambre {
+  background-color: #ef4444;
+}
+.bar-energia {
+  background-color: #fbbf24;
+}
+.bar-felicidad {
+  background-color: #38bdf8;
+}
+.bar-salud {
+  background-color: #22c55e;
+}
 
 /* Color gris azulado para la Defensa, ahora alineada con el contenedor */
-.bar-defensa   { 
-  background-color: #94a3b8; 
+.bar-defensa {
+  background-color: #94a3b8;
 }
 
 /* 7. BOTONES DE ACCIÓN EN LA CARD */
@@ -318,9 +338,15 @@ body.modo-noche {
   color: #000000;
 }
 
-.btn-fuego-select   { background-color: #f97316; }
-.btn-agua-select    { background-color: #38bdf8; }
-.btn-tierra-select { background-color: #4ade80; }
+.btn-fuego-select {
+  background-color: #f97316;
+}
+.btn-agua-select {
+  background-color: #38bdf8;
+}
+.btn-tierra-select {
+  background-color: #4ade80;
+}
 
 .btn-cancelar {
   background-color: transparent;
