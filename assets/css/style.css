@@ -1,4 +1,4 @@
-/* 1. ESTILOS GENERALES*/
+/* 1. ESTILOS GENERALES */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,8 +7,8 @@
 }
 
 body {
-  background-color: #1e1b4b; 
-  color: #f8fafc; 
+  background-color: #1e1b4b;
+  color: #f8fafc;
   padding: 20px;
   min-height: 100vh;
 }
@@ -20,7 +20,7 @@ header {
 
 header h1 {
   font-size: 40px;
-  color: #fbbf24; /* Color amarillo/dorado */
+  color: #fbbf24;
   margin-bottom: 5px;
 }
 
@@ -29,7 +29,7 @@ header .subtitle {
   font-size: 16px;
 }
 
-/* 2. CONTENEDOR DE TAMAGOTCHIS  */
+/* 2. CONTENEDOR DE TAMAGOTCHIS */
 .zoo-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -38,25 +38,24 @@ header .subtitle {
   margin: 0 auto 30px auto;
 }
 
-/* 3. TARJETA INDIVIDUAL DE CRIATURA*/
+/* 3. TARJETA INDIVIDUAL */
 .tamagotchi-card {
-  background-color: #1e293b; /* Gris azulado para los paneles */
+  background-color: #1e293b;
   border-radius: 15px;
   padding: 20px;
-  border: 2px solid #475569; /* Borde gris normal */
+  border: 2px solid #475569;
   text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Colores específicos de bordes según el elemento (Para tus subclases) */
-.card-fuego {
-  border-color: #f97316;
-} /* Naranja */
-.card-agua {
-  border-color: #38bdf8;
-} /* Celeste */
-.card-tierra {
-  border-color: #4ade80;
-} /* Verde */
+.tamagotchi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-fuego  { border-color: #f97316; }
+.card-agua   { border-color: #38bdf8; }
+.card-tierra { border-color: #4ade80; }
 
 .card-header {
   display: flex;
@@ -71,7 +70,7 @@ header .subtitle {
   font-size: 20px;
 }
 
-/* Etiquetas de tipo */
+/* 4. BADGES */
 .badge {
   padding: 4px 10px;
   border-radius: 10px;
@@ -79,17 +78,11 @@ header .subtitle {
   font-weight: bold;
   color: #000000;
 }
-.badge-fuego {
-  background-color: #f97316;
-}
-.badge-agua {
-  background-color: #38bdf8;
-}
-.badge-tierra {
-  background-color: #4ade80;
-}
+.badge-fuego  { background-color: #f97316; }
+.badge-agua   { background-color: #38bdf8; }
+.badge-tierra { background-color: #4ade80; }
 
-/* 4. CONTENEDOR PARA LAS IMÁGENES DE LOS PERSONAJES*/
+/* 5. SPRITE */
 .sprite-container {
   background-color: #020617;
   border-radius: 10px;
@@ -114,7 +107,7 @@ header .subtitle {
   font-weight: bold;
 }
 
-/* 5. BARRAS DE ESTADÍSTICAS (PROGRESO) */
+/* 6. BARRAS DE ESTADÍSTICAS */
 .stats-panel {
   background-color: #0f172a;
   border-radius: 10px;
@@ -140,7 +133,7 @@ header .subtitle {
 }
 
 .bar-container {
-  background-color: #475569; /* Color de barra vacía */
+  background-color: #475569;
   border-radius: 5px;
   height: 10px;
   width: 100%;
@@ -149,24 +142,16 @@ header .subtitle {
 .bar {
   height: 100%;
   border-radius: 5px;
-  width: 0%; /* El JS se encarga de cambiar este porcentaje */
+  width: 0%;
+  transition: width 0.4s ease;
 }
 
-/* Colores planos para el rellenado de las barras */
-.bar-hambre {
-  background-color: #ef4444;
-} /* Rojo */
-.bar-energia {
-  background-color: #fbbf24;
-} /* Amarillo */
-.bar-felicidad {
-  background-color: #38bdf8;
-} /* Azul/Celeste */
-.bar-salud {
-  background-color: #22c55e;
-} /* Verde */
+.bar-hambre    { background-color: #ef4444; }
+.bar-energia   { background-color: #fbbf24; }
+.bar-felicidad { background-color: #38bdf8; }
+.bar-salud     { background-color: #22c55e; }
 
-/* 6. BOTONES DE ACCIÓN INDIVIDUAL*/
+/* 7. BOTONES DE ACCIÓN EN LA CARD */
 .actions-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -188,9 +173,13 @@ header .subtitle {
   background-color: #475569;
 }
 
-/* Botón especial para eliminar/liberar */
+.btn-action:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .btn-delete {
-  grid-column: span 2; /* Ocupa las dos columnas de ancho */
+  grid-column: span 2;
   background-color: #b91c1c;
   color: #ffffff;
   border: none;
@@ -201,7 +190,14 @@ header .subtitle {
   background-color: #ef4444;
 }
 
-/* 7. CONTROLES GENERALES (ECOSISTEMA INTERACTIVO) Y CONSOLA */
+.panel-muerto {
+  color: #ef4444;
+  font-size: 13px;
+  grid-column: span 2;
+  margin-top: 5px;
+}
+
+/* 8. CONTROLES GLOBALES Y CONSOLA */
 .global-controls {
   background-color: #1e293b;
   border-radius: 15px;
@@ -248,12 +244,10 @@ header .subtitle {
   background-color: #f59e0b;
 }
 
-/* Modo Nocturno */
 body.modo-noche {
   background-color: #020617;
 }
 
-/* Consola de Logs estilo terminal */
 .console-log {
   background-color: #000000;
   border: 1px solid #334155;
@@ -263,7 +257,7 @@ body.modo-noche {
   overflow-y: auto;
   font-family: monospace;
   font-size: 13px;
-  color: #34d399; /* Verde fósforo */
+  color: #34d399;
   text-align: left;
 }
 
@@ -272,7 +266,7 @@ body.modo-noche {
   margin-bottom: 4px;
 }
 
-/* 8. VENTANA MODAL (MENÚ DE ADOPCIÓN) */
+/* 9. MODAL DE ADOPCIÓN */
 .modal {
   display: none;
   position: fixed;
@@ -280,7 +274,7 @@ body.modo-noche {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro transparente */
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
 }
 
@@ -324,15 +318,9 @@ body.modo-noche {
   color: #000000;
 }
 
-.btn-fuego-select {
-  background-color: #f97316;
-}
-.btn-agua-select {
-  background-color: #38bdf8;
-}
-.btn-tierra-select {
-  background-color: #4ade80;
-}
+.btn-fuego-select  { background-color: #f97316; }
+.btn-agua-select   { background-color: #38bdf8; }
+.btn-tierra-select { background-color: #4ade80; }
 
 .btn-cancelar {
   background-color: transparent;
@@ -347,14 +335,38 @@ body.modo-noche {
   color: #ffffff;
 }
 
-/* 9. MEDIA QUERY  */
+/* 10. RESPONSIVE */
+/* Tablets (601px – 900px)*/
+@media (min-width: 601px) and (max-width: 900px) {
+  .zoo-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Celulares (hasta 600px)*/
 @media (max-width: 600px) {
   body {
-    padding: 10px;
+    padding: 12px;
   }
 
   header h1 {
-    font-size: 30px;
+    font-size: 28px;
+  }
+
+  header .subtitle {
+    font-size: 13px;
+  }
+
+  .zoo-container {
+    grid-template-columns: 1fr;
+  }
+
+  .sprite-container {
+    height: 130px;
+  }
+
+  .actions-panel {
+    grid-template-columns: 1fr 1fr;
   }
 
   .buttons-group {
@@ -364,5 +376,14 @@ body.modo-noche {
   .btn-global {
     width: 100%;
     text-align: center;
+  }
+
+  .modal-content {
+    margin: 30% auto;
+    padding: 20px;
+  }
+
+  .global-controls {
+    padding: 15px;
   }
 }

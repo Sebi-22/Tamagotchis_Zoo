@@ -130,7 +130,7 @@ class TamagotchiFuego extends Tamagotchi {
     alimentar() {
         if (this.estadoGeneral === "Muerto 🪦") return;
         this.hambre = this.hambre - 30;
-        this.energia = this.energia + 25; 
+        this.energia = this.energia + 25;
         logConsole("🔥 " + this.nombre + " devoró carbón picante. ¡Está encendido!");
     }
 
@@ -141,7 +141,7 @@ class TamagotchiFuego extends Tamagotchi {
             return;
         }
         this.felicidad = this.felicidad + 35;
-        this.energia = this.energia - 30; 
+        this.energia = this.energia - 30;
         this.hambre = this.hambre + 15;
         logConsole("⚡ " + this.nombre + " jugó con demasiada intensidad explosiva.");
     }
@@ -155,7 +155,7 @@ class TamagotchiAgua extends Tamagotchi {
     alimentar() {
         if (this.estadoGeneral === "Muerto 🪦") return;
         this.hambre = this.hambre - 25;
-        this.salud = this.salud + 15; 
+        this.salud = this.salud + 15;
         logConsole("💧 " + this.nombre + " absorbió gotas purificadoras. Recuperó hambre y salud.");
     }
 
@@ -181,6 +181,7 @@ class TamagotchiAgua extends Tamagotchi {
         }
     }
 }
+
 class TamagotchiTierra extends Tamagotchi {
     constructor(nombre) {
         super(nombre, "Tierra");
@@ -188,36 +189,32 @@ class TamagotchiTierra extends Tamagotchi {
 
     descansar() {
         if (this.estadoGeneral === "Muerto 🪦") return;
-        this.energia = 100; 
+        this.energia = 100;
         this.felicidad = this.felicidad + 10;
         logConsole("🪨 " + this.nombre + " se enraizó profundamente. ¡Energía al máximo!");
     }
 
     alimentar() {
-        if (this.estadoGeneral === "Muerto 🪦")
-        return;
+        if (this.estadoGeneral === "Muerto 🪦") return;
         let textoClases = document.body.className;
         let buscar = "modo-noche";
         let esNoche = false;
-        // Buscamos la palabra letra por letra para detectar el modo noche
         for (let i = 0; i <= textoClases.length - buscar.length; i++) {
             let coincidenTodas = true;
-            
             for (let j = 0; j < buscar.length; j++) {
                 if (textoClases[i + j] !== buscar[j]) {
                     coincidenTodas = false;
                     break;
                 }
             }
-            
             if (coincidenTodas === true) {
                 esNoche = true;
                 break;
             }
         }
-        
+
         if (esNoche === true) {
-            this.hambre = this.hambre - 50; 
+            this.hambre = this.hambre - 50;
             this.energia = this.energia + 20;
             logConsole("🌙🪨 " + this.nombre + " se alimentó de noche. ¡La tierra absorbe el doble de energía!");
         } else {
@@ -236,20 +233,21 @@ let listaTamagotchis = [
 ];
 
 const imagenesEspecies = {
-    "Fuego": "assets/imagenes/Fuego.png",
-    "Agua": "assets/imagenes/Agua.png",
+    "Fuego":  "assets/imagenes/Fuego.png",
+    "Agua":   "assets/imagenes/Agua.png",
     "Tierra": "assets/imagenes/Tierra.png"
 };
 
+
 function renderTamagotchis() {
     const contenedor = document.getElementById("zoo-wrapper");
-    contenedor.innerHTML = ""; 
+    contenedor.innerHTML = "";
 
     if (listaTamagotchis.length === 0) {
         contenedor.innerHTML = `<p class="subtitle" style="grid-column: 1/-1;">El zoológico está vacío. ¡Adopta una criatura elemental!</p>`;
         return;
     }
-    
+
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
         const claseElemento = "card-" + t.especie.toLowerCase();
@@ -300,29 +298,31 @@ function renderTamagotchis() {
     }
 }
 
+// 4. INTERACCIÓN INDIVIDUAL
 function interactuarIndividual(index, accion) {
     const bicho = listaTamagotchis[index];
+
     if (bicho.estadoGeneral === "Muerto 🪦") {
         logConsole("❌ No podés interactuar con " + bicho.nombre + ". Ha muerto.");
         return;
     }
-    
+
     if (accion === 'alimentar') bicho.alimentar();
-    if (accion === 'jugar') bicho.jugar();
+    if (accion === 'jugar')     bicho.jugar();
     if (accion === 'descansar') bicho.descansar();
     if (accion === 'acariciar') bicho.acariciar();
-    
+
     renderTamagotchis();
 }
 
-// 4. CICLO DE VIDA 
+// 5. CICLO DE VIDA
 function pasarTiempo() {
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
         if (t.estadoGeneral !== "Muerto 🪦") {
-            t.hambre = t.hambre + 4;    
-            t.energia = t.energia - 3;   
-            t.felicidad = t.felicidad - 2; 
+            t.hambre = t.hambre + 4;
+            t.energia = t.energia - 3;
+            t.felicidad = t.felicidad - 2;
 
             if (t.hambre >= 85 || t.energia <= 15) {
                 t.salud = t.salud - 6;
@@ -337,11 +337,9 @@ function pasarTiempo() {
     }
     renderTamagotchis();
 }
-// El ciclo de vida avanza cada 5 segundos
 setInterval(pasarTiempo, 5000);
 
-
-// 5. MODALES Y CONTROL DE ADOPCIONES 
+// 6. ADOPTAR Y ELIMINAR
 function abrirAdopcion() {
     document.getElementById("modal-adopcion").style.display = "block";
 }
@@ -352,27 +350,27 @@ function cerrarModal() {
 
 function adopcionConfirmada(especie) {
     let nombre = prompt("Dale un nombre a tu invocación de " + especie + ":");
-    
+
     if (nombre === null || nombre === "") {
         alert("¡Debes asignarle un nombre válido!");
         return;
     }
 
     let nuevaCriatura;
-    if (especie === "Fuego") nuevaCriatura = new TamagotchiFuego(nombre);
-    if (especie === "Agua") nuevaCriatura = new TamagotchiAgua(nombre);
+    if (especie === "Fuego")  nuevaCriatura = new TamagotchiFuego(nombre);
+    if (especie === "Agua")   nuevaCriatura = new TamagotchiAgua(nombre);
     if (especie === "Tierra") nuevaCriatura = new TamagotchiTierra(nombre);
 
     listaTamagotchis.push(nuevaCriatura);
     logConsole("✨ ¡Invocación Exitosa! " + nombre + " de tipo " + especie + " se unió al hábitat.");
-    
+
     cerrarModal();
     renderTamagotchis();
 }
 
 function eliminarTamagotchi(index) {
     const bicho = listaTamagotchis[index];
-    
+
     let nuevoArray = [];
     for (let i = 0; i < listaTamagotchis.length; i++) {
         if (i !== index) {
@@ -380,21 +378,20 @@ function eliminarTamagotchi(index) {
         }
     }
     listaTamagotchis = nuevoArray;
-    
+
     logConsole("👋 El elemental " + bicho.nombre + " ha regresado a la naturaleza.");
     renderTamagotchis();
 }
 
-// 6. ACTIVIDADES GRUPALES 
+// 7. ACTIVIDADES GRUPALES
 function toggleAmbiente() {
     const body = document.body;
     const btn = document.getElementById("btn-toggle-time");
-    
+
     let textoClases = body.className;
     let buscar = "modo-noche";
     let indiceEncontrado = -1;
 
-    // Buscamos la posición de la palabra letra por letra
     for (let i = 0; i <= textoClases.length - buscar.length; i++) {
         let coincidenTodas = true;
         for (let j = 0; j < buscar.length; j++) {
@@ -411,14 +408,12 @@ function toggleAmbiente() {
 
     if (indiceEncontrado !== -1) {
         let textoLimpio = "";
-        
         for (let i = 0; i < textoClases.length; i++) {
             if (i < indiceEncontrado || i >= indiceEncontrado + buscar.length) {
                 textoLimpio += textoClases[i];
             }
         }
-        
-        body.className = textoLimpio; 
+        body.className = textoLimpio;
         btn.innerText = "🌙 Cambiar a Noche";
         logConsole("☀️ El sol brilla en el Zoo Elemental. Energía renovada.");
     } else {
@@ -430,11 +425,16 @@ function toggleAmbiente() {
 
 function ejecutarFiesta() {
     if (listaTamagotchis.length === 0) return;
-    
+
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
         if (t.estadoGeneral !== "Muerto 🪦") {
-            t.felicidad = t.felicidad + 20;
+            if (t.especie === "Agua") {
+                t.felicidad = t.felicidad + 40;
+                logConsole("💧 " + t.nombre + " adora las fiestas. ¡Recibió el doble de felicidad!");
+            } else {
+                t.felicidad = t.felicidad + 20;
+            }
             t.energia = t.energia - 10;
         }
     }
@@ -457,7 +457,7 @@ function ejecutarDuelo() {
                 retador = listaTamagotchis[i];
             } else if (oponente === null) {
                 oponente = listaTamagotchis[i];
-                break; 
+                break;
             }
         }
     }
@@ -467,11 +467,22 @@ function ejecutarDuelo() {
         return;
     }
 
-    retador.felicidad = retador.felicidad + 30;
-    oponente.salud = oponente.salud - 20;
-    oponente.felicidad = oponente.felicidad - 10;
+    let ganador = null;
+    let perdedor = null;
 
-    logConsole("⚔️ Duelo Amistoso: " + retador.nombre + " ganó el encuentro contra " + oponente.nombre + ".");
+    if (retador.energia >= oponente.energia) {
+        ganador = retador;
+        perdedor = oponente;
+    } else {
+        ganador = oponente;
+        perdedor = retador;
+    }
+
+    ganador.felicidad = ganador.felicidad + 30;
+    perdedor.salud = perdedor.salud - 20;
+    perdedor.felicidad = perdedor.felicidad - 10;
+
+    logConsole("⚔️ Duelo Amistoso: " + ganador.nombre + " (energía: " + ganador.energia + ") venció a " + perdedor.nombre + " (energía: " + perdedor.energia + ").");
     renderTamagotchis();
 }
 
@@ -495,7 +506,7 @@ function ejecutarRitual() {
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
         if (t !== sanador && t.estadoGeneral !== "Muerto 🪦") {
-            opciones.push(i); 
+            opciones.push(i);
         }
     }
 
@@ -513,7 +524,6 @@ function ejecutarRitual() {
     let eleccion = prompt(mensaje + "\nEscribí el número de tu elección:");
     let numero = parseInt(eleccion);
 
-    // Comparación pura para detectar NaN sin funciones auxiliares
     if (numero !== numero || numero < 1 || numero > opciones.length) {
         logConsole("🔮 Ritual cancelado.");
         return;
@@ -546,7 +556,7 @@ function ejecutarCarrera() {
     for (let i = 0; i < participantes.length; i++) {
         let base = 0;
         if (participantes[i].especie === "Fuego") {
-            base = 70; 
+            base = 70;
         } else {
             base = 40;
         }
@@ -572,11 +582,11 @@ function ejecutarCarrera() {
     renderTamagotchis();
 }
 
-// 7. CONSOLA DE EVENTOS 
+// 8. CONSOLA DE EVENTOS
 function logConsole(mensaje) {
     const consola = document.getElementById("event-console");
     consola.innerHTML = '<span class="console-line">>> ' + mensaje + '</span>' + consola.innerHTML;
 }
 
-// Renderizado inicial al cargar el script
+// Renderizado inicial
 renderTamagotchis();
