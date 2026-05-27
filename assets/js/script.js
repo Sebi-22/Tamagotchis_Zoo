@@ -18,7 +18,6 @@ class Tamagotchi {
         this.#estadoGeneral = "Feliz";
     }
 
-    // Getters comunes
     get nombre() { return this.#nombre; }
     get especie() { return this.#especie; }
     get hambre() { return this.#hambre; }
@@ -27,7 +26,6 @@ class Tamagotchi {
     get salud() { return this.#salud; }
     get estadoGeneral() { return this.#estadoGeneral; }
 
-    // Setters usando IF clásicos
     set hambre(valor) {
         if (valor > 100) {
             this.#hambre = 100;
@@ -76,10 +74,9 @@ class Tamagotchi {
         this.#estadoGeneral = nuevoEstado;
     }
 
-    // Lógica para los cambios de estado de humor
     actualizarEstado() {
         if (this.#salud <= 0) {
-            this.#estadoGeneral = "Fallecido 🪦";
+            this.#estadoGeneral = "Muerto 🪦";
         } else if (this.#energia < 20) {
             this.#estadoGeneral = "Muy Cansado 🥱";
         } else if (this.#hambre > 75) {
@@ -91,16 +88,15 @@ class Tamagotchi {
         }
     }
 
-    // Métodos de interacción individual
     alimentar() {
-        if (this.#estadoGeneral === "Fallecido 🪦") return;
+        if (this.#estadoGeneral === "Muerto 🪦") return;
         this.hambre = this.hambre - 25;
         this.energia = this.energia + 10;
         logConsole("🍖 Alimentaste a " + this.nombre + ". Saciando su apetito.");
     }
 
     jugar() {
-        if (this.#estadoGeneral === "Fallecido 🪦") return;
+        if (this.#estadoGeneral === "Muerto 🪦") return;
         if (this.energia < 15) {
             logConsole("❌ " + this.nombre + " está muy cansado para jugar.");
             return;
@@ -112,36 +108,34 @@ class Tamagotchi {
     }
 
     descansar() {
-        if (this.#estadoGeneral === "Fallecido 🪦") return;
+        if (this.#estadoGeneral === "Muerto 🪦") return;
         this.energia = this.energia + 30;
         this.hambre = this.hambre + 5;
         logConsole("💤 " + this.nombre + " tomó una siesta reparadora.");
     }
 
     acariciar() {
-        if (this.#estadoGeneral === "Fallecido 🪦") return;
+        if (this.#estadoGeneral === "Muerto 🪦") return;
         this.felicidad = this.felicidad + 15;
         logConsole("❤️ Le diste mimos a " + this.nombre + ". Siente tu cariño.");
     }
 }
 
-// 2. SUBCLASES (HERENCIA Y POLIMORFISMO)
+// 2. SUBCLASES
 class TamagotchiFuego extends Tamagotchi {
     constructor(nombre) {
         super(nombre, "Fuego");
     }
 
-    // Polimorfismo en el método alimentar
     alimentar() {
-        if (this.estadoGeneral === "Fallecido 🪦") return;
+        if (this.estadoGeneral === "Muerto 🪦") return;
         this.hambre = this.hambre - 30;
         this.energia = this.energia + 25; 
         logConsole("🔥 " + this.nombre + " devoró carbón picante. ¡Está encendido!");
     }
 
-    // Polimorfismo en el método jugar
     jugar() {
-        if (this.estadoGeneral === "Fallecido 🪦") return;
+        if (this.estadoGeneral === "Muerto 🪦") return;
         if (this.energia < 30) {
             logConsole("❌ " + this.nombre + " no tiene suficiente chispa para jugar.");
             return;
@@ -158,29 +152,25 @@ class TamagotchiAgua extends Tamagotchi {
         super(nombre, "Agua");
     }
 
-    // Polimorfismo en el método alimentar
     alimentar() {
-        if (this.estadoGeneral === "Fallecido 🪦") return;
+        if (this.estadoGeneral === "Muerto 🪦") return;
         this.hambre = this.hambre - 25;
         this.salud = this.salud + 15; 
         logConsole("💧 " + this.nombre + " absorbió gotas purificadoras. Recuperó hambre y salud.");
     }
 
-    //Polimorfismo en jugar
-    // La felicidad real la gana en actividades grupales
     jugar() {
-        if (this.estadoGeneral === "Fallecido 🪦") return;
+        if (this.estadoGeneral === "Muerto 🪦") return;
         if (this.energia < 15) {
             logConsole("❌ " + this.nombre + " está muy cansado para jugar.");
             return;
         }
-        this.felicidad = this.felicidad + 10; // Menos que los demás: necesita compañía
+        this.felicidad = this.felicidad + 10;
         this.energia = this.energia - 15;
         this.hambre = this.hambre + 10;
         logConsole("🌊 " + this.nombre + " jugó solo... pero prefiere tener compañía para divertirse de verdad.");
     }
 
-    // Habilidad especial grupal
     transferirSalud(objetivo) {
         if (this.salud > 20) {
             this.salud = this.salud - 15;
@@ -191,26 +181,43 @@ class TamagotchiAgua extends Tamagotchi {
         }
     }
 }
-
 class TamagotchiTierra extends Tamagotchi {
     constructor(nombre) {
         super(nombre, "Tierra");
     }
 
-    // Polimorfismo en el método descansar
     descansar() {
-        if (this.estadoGeneral === "Fallecido 🪦") return;
+        if (this.estadoGeneral === "Muerto 🪦") return;
         this.energia = 100; 
         this.felicidad = this.felicidad + 10;
         logConsole("🪨 " + this.nombre + " se enraizó profundamente. ¡Energía al máximo!");
     }
 
-    // Polimorfismo en alimentar
     alimentar() {
-        if (this.estadoGeneral === "Fallecido 🪦") return;
-        const esNoche = document.body.classList.contains("modo-noche");
-        if (esNoche) {
-            this.hambre = this.hambre - 50; // El doble de beneficio de noche
+        if (this.estadoGeneral === "Muerto 🪦")
+        return;
+        let textoClases = document.body.className;
+        let buscar = "modo-noche";
+        let esNoche = false;
+        // Buscamos la palabra letra por letra para detectar el modo noche
+        for (let i = 0; i <= textoClases.length - buscar.length; i++) {
+            let coincidenTodas = true;
+            
+            for (let j = 0; j < buscar.length; j++) {
+                if (textoClases[i + j] !== buscar[j]) {
+                    coincidenTodas = false;
+                    break;
+                }
+            }
+            
+            if (coincidenTodas === true) {
+                esNoche = true;
+                break;
+            }
+        }
+        
+        if (esNoche === true) {
+            this.hambre = this.hambre - 50; 
             this.energia = this.energia + 20;
             logConsole("🌙🪨 " + this.nombre + " se alimentó de noche. ¡La tierra absorbe el doble de energía!");
         } else {
@@ -221,7 +228,7 @@ class TamagotchiTierra extends Tamagotchi {
     }
 }
 
-// 3. MANEJO DE LISTAS CON NOMBRES TEMÁTICOS ELEMENTALES
+// 3. MANEJO DE LISTAS
 let listaTamagotchis = [
     new TamagotchiFuego("Flama"),
     new TamagotchiAgua("Gota"),
@@ -234,7 +241,6 @@ const imagenesEspecies = {
     "Tierra": "assets/imagenes/Tierra.png"
 };
 
-// Función para renderizar el estado actual de los tamagotchis en el DOM
 function renderTamagotchis() {
     const contenedor = document.getElementById("zoo-wrapper");
     contenedor.innerHTML = ""; 
@@ -243,7 +249,7 @@ function renderTamagotchis() {
         contenedor.innerHTML = `<p class="subtitle" style="grid-column: 1/-1;">El zoológico está vacío. ¡Adopta una criatura elemental!</p>`;
         return;
     }
-
+    
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
         const claseElemento = "card-" + t.especie.toLowerCase();
@@ -294,11 +300,10 @@ function renderTamagotchis() {
     }
 }
 
-// Función para manejar las interacciones individuales
 function interactuarIndividual(index, accion) {
     const bicho = listaTamagotchis[index];
-    if (bicho.estadoGeneral === "Fallecido 🪦") {
-        logConsole("❌ No podés interactuar con " + bicho.nombre + ". Ha fallecido.");
+    if (bicho.estadoGeneral === "Muerto 🪦") {
+        logConsole("❌ No podés interactuar con " + bicho.nombre + ". Ha muerto.");
         return;
     }
     
@@ -310,11 +315,11 @@ function interactuarIndividual(index, accion) {
     renderTamagotchis();
 }
 
-// 4. CICLO DE VIDA CON TIMEOUT Y CONTROL DE ESTADOS
+// 4. CICLO DE VIDA 
 function pasarTiempo() {
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
-        if (t.estadoGeneral !== "Fallecido 🪦") {
+        if (t.estadoGeneral !== "Muerto 🪦") {
             t.hambre = t.hambre + 4;    
             t.energia = t.energia - 3;   
             t.felicidad = t.felicidad - 2; 
@@ -324,7 +329,6 @@ function pasarTiempo() {
                 logConsole("⚠️ ¡Atención! " + t.nombre + " está perdiendo salud por descuido.");
             }
 
-            // Modo apagado para TamagotchiFuego
             if (t.especie === "Fuego" && t.felicidad < 25) {
                 t.energia = t.energia - 10;
                 logConsole("🔥 " + t.nombre + " entró en modo apagado. ¡Está perdiendo energía rápido!");
@@ -332,12 +336,10 @@ function pasarTiempo() {
         }
     }
     renderTamagotchis();
-    
-    // Se vuelve a llamar sola cada 5 segundos para mantener el ciclo continuo
-    setTimeout(pasarTiempo, 5000);
 }
-// Arrancamos el primer loop de tiempo al cargar la página
-setTimeout(pasarTiempo, 5000);
+// El ciclo de vida avanza cada 5 segundos
+setInterval(pasarTiempo, 5000);
+
 
 // 5. MODALES Y CONTROL DE ADOPCIONES 
 function abrirAdopcion() {
@@ -368,7 +370,6 @@ function adopcionConfirmada(especie) {
     renderTamagotchis();
 }
 
-// Eliminación manual directa
 function eliminarTamagotchi(index) {
     const bicho = listaTamagotchis[index];
     
@@ -384,18 +385,46 @@ function eliminarTamagotchi(index) {
     renderTamagotchis();
 }
 
-// 6. ACTIVIDADES GRUPALES (MULTIPLAYER EN EL ECO-SISTEMA)
+// 6. ACTIVIDADES GRUPALES 
 function toggleAmbiente() {
     const body = document.body;
     const btn = document.getElementById("btn-toggle-time");
-    body.classList.toggle("modo-noche");
+    
+    let textoClases = body.className;
+    let buscar = "modo-noche";
+    let indiceEncontrado = -1;
 
-    if (body.classList.contains("modo-noche")) {
-        btn.innerText = "☀️ Cambiar a Día";
-        logConsole("🌙 Ha caído la noche en el hábitat. Las criaturas Tierra aprovechan para comer mejor.");
-    } else {
+    // Buscamos la posición de la palabra letra por letra
+    for (let i = 0; i <= textoClases.length - buscar.length; i++) {
+        let coincidenTodas = true;
+        for (let j = 0; j < buscar.length; j++) {
+            if (textoClases[i + j] !== buscar[j]) {
+                coincidenTodas = false;
+                break;
+            }
+        }
+        if (coincidenTodas === true) {
+            indiceEncontrado = i;
+            break;
+        }
+    }
+
+    if (indiceEncontrado !== -1) {
+        let textoLimpio = "";
+        
+        for (let i = 0; i < textoClases.length; i++) {
+            if (i < indiceEncontrado || i >= indiceEncontrado + buscar.length) {
+                textoLimpio += textoClases[i];
+            }
+        }
+        
+        body.className = textoLimpio; 
         btn.innerText = "🌙 Cambiar a Noche";
         logConsole("☀️ El sol brilla en el Zoo Elemental. Energía renovada.");
+    } else {
+        body.className = textoClases + " modo-noche";
+        btn.innerText = "☀️ Cambiar a Día";
+        logConsole("🌙 Ha caído la noche en el hábitat. Las criaturas Tierra aprovechan para comer mejor.");
     }
 }
 
@@ -404,7 +433,7 @@ function ejecutarFiesta() {
     
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
-        if (t.estadoGeneral !== "Fallecido 🪦") {
+        if (t.estadoGeneral !== "Muerto 🪦") {
             t.felicidad = t.felicidad + 20;
             t.energia = t.energia - 10;
         }
@@ -423,7 +452,7 @@ function ejecutarDuelo() {
     let oponente = null;
 
     for (let i = 0; i < listaTamagotchis.length; i++) {
-        if (listaTamagotchis[i].estadoGeneral !== "Fallecido 🪦") {
+        if (listaTamagotchis[i].estadoGeneral !== "Muerto 🪦") {
             if (retador === null) {
                 retador = listaTamagotchis[i];
             } else if (oponente === null) {
@@ -446,13 +475,12 @@ function ejecutarDuelo() {
     renderTamagotchis();
 }
 
-// NUEVO: El ritual ahora pregunta al usuario quién recibe la curación
 function ejecutarRitual() {
     let sanador = null;
 
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
-        if (t.especie === "Agua" && t.estadoGeneral !== "Fallecido 🪦") {
+        if (t.especie === "Agua" && t.estadoGeneral !== "Muerto 🪦") {
             sanador = t;
             break;
         }
@@ -463,12 +491,11 @@ function ejecutarRitual() {
         return;
     }
 
-    // Armar lista de posibles objetivos (vivos, que no sean el sanador)
     let opciones = [];
     for (let i = 0; i < listaTamagotchis.length; i++) {
         const t = listaTamagotchis[i];
-        if (t !== sanador && t.estadoGeneral !== "Fallecido 🪦") {
-            opciones.push(i); // Guardamos el índice para poder acceder después
+        if (t !== sanador && t.estadoGeneral !== "Muerto 🪦") {
+            opciones.push(i); 
         }
     }
 
@@ -477,7 +504,6 @@ function ejecutarRitual() {
         return;
     }
 
-    // Mostrar las opciones al usuario con un prompt
     let mensaje = "¿A quién quiere curar " + sanador.nombre + "?\n";
     for (let i = 0; i < opciones.length; i++) {
         const idx = opciones[i];
@@ -487,7 +513,8 @@ function ejecutarRitual() {
     let eleccion = prompt(mensaje + "\nEscribí el número de tu elección:");
     let numero = parseInt(eleccion);
 
-    if (isNaN(numero) || numero < 1 || numero > opciones.length) {
+    // Comparación pura para detectar NaN sin funciones auxiliares
+    if (numero !== numero || numero < 1 || numero > opciones.length) {
         logConsole("🔮 Ritual cancelado.");
         return;
     }
@@ -497,8 +524,6 @@ function ejecutarRitual() {
     renderTamagotchis();
 }
 
-// NUEVO: Actividad grupal — Carrera elemental
-// Fuego tiene la mayor ventaja, los demás compiten con algo de azar
 function ejecutarCarrera() {
     if (listaTamagotchis.length < 2) {
         logConsole("❌ Se necesitan al menos 2 criaturas para organizar una carrera.");
@@ -507,7 +532,7 @@ function ejecutarCarrera() {
 
     let participantes = [];
     for (let i = 0; i < listaTamagotchis.length; i++) {
-        if (listaTamagotchis[i].estadoGeneral !== "Fallecido 🪦") {
+        if (listaTamagotchis[i].estadoGeneral !== "Muerto 🪦") {
             participantes.push(listaTamagotchis[i]);
         }
     }
@@ -517,7 +542,6 @@ function ejecutarCarrera() {
         return;
     }
 
-    // Calcular puntaje: Fuego tiene base más alta, todos suman algo de azar
     let puntajes = [];
     for (let i = 0; i < participantes.length; i++) {
         let base = 0;
@@ -530,7 +554,6 @@ function ejecutarCarrera() {
         puntajes.push(puntaje);
     }
 
-    // Encontrar al ganador (el de mayor puntaje)
     let ganadorIndex = 0;
     for (let i = 1; i < puntajes.length; i++) {
         if (puntajes[i] > puntajes[ganadorIndex]) {
@@ -540,7 +563,6 @@ function ejecutarCarrera() {
 
     let ganador = participantes[ganadorIndex];
 
-    // Aplicar efectos: el ganador sube felicidad, todos gastan energía
     for (let i = 0; i < participantes.length; i++) {
         participantes[i].energia = participantes[i].energia - 20;
     }
@@ -550,12 +572,11 @@ function ejecutarCarrera() {
     renderTamagotchis();
 }
 
-// 7. CONSOLA DE EVENTOS
+// 7. CONSOLA DE EVENTOS 
 function logConsole(mensaje) {
     const consola = document.getElementById("event-console");
-    consola.innerHTML += '<span class="console-line">>> ' + mensaje + '</span>';
-    consola.scrollTop = consola.scrollHeight; 
+    consola.innerHTML = '<span class="console-line">>> ' + mensaje + '</span>' + consola.innerHTML;
 }
 
-// Renderizado inicial al cargar
+// Renderizado inicial al cargar el script
 renderTamagotchis();
