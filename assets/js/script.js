@@ -166,7 +166,7 @@ class TamagotchiAgua extends Tamagotchi {
         logConsole("💧 " + this.nombre + " absorbió gotas purificadoras. Recuperó hambre y salud.");
     }
 
-    // NUEVO: Polimorfismo en jugar — solo le suma poco si está solo
+    //Polimorfismo en jugar
     // La felicidad real la gana en actividades grupales
     jugar() {
         if (this.estadoGeneral === "Fallecido 🪦") return;
@@ -205,7 +205,7 @@ class TamagotchiTierra extends Tamagotchi {
         logConsole("🪨 " + this.nombre + " se enraizó profundamente. ¡Energía al máximo!");
     }
 
-    // NUEVO: Polimorfismo en alimentar — de noche come mejor
+    // Polimorfismo en alimentar
     alimentar() {
         if (this.estadoGeneral === "Fallecido 🪦") return;
         const esNoche = document.body.classList.contains("modo-noche");
@@ -324,8 +324,7 @@ function pasarTiempo() {
                 logConsole("⚠️ ¡Atención! " + t.nombre + " está perdiendo salud por descuido.");
             }
 
-            // NUEVO: Modo apagado para TamagotchiFuego
-            // Si su felicidad cae muy baja, pierde energía extra cada ciclo
+            // Modo apagado para TamagotchiFuego
             if (t.especie === "Fuego" && t.felicidad < 25) {
                 t.energia = t.energia - 10;
                 logConsole("🔥 " + t.nombre + " entró en modo apagado. ¡Está perdiendo energía rápido!");
@@ -523,7 +522,7 @@ function ejecutarCarrera() {
     for (let i = 0; i < participantes.length; i++) {
         let base = 0;
         if (participantes[i].especie === "Fuego") {
-            base = 70; // Fuego arranca con ventaja
+            base = 70; 
         } else {
             base = 40;
         }
