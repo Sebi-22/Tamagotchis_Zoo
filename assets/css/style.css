@@ -30,10 +30,9 @@ header .subtitle {
 }
 
 
-/* 2. CONTENEDOR DE TAMAGOTCHIS (GRID RESPONSIVE AUTOMÁTICO) */
+/* 2. CONTENEDOR DE TAMAGOTCHIS  */
 .zoo-container {
     display: grid;
-    /* Esto hace que si entran 3 tarjetas se pongan en fila, y si no hay espacio bajen solas */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     max-width: 1200px;
