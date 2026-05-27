@@ -183,8 +183,22 @@ class TamagotchiAgua extends Tamagotchi {
 }
 
 class TamagotchiTierra extends Tamagotchi {
+    #defensa;
     constructor(nombre) {
         super(nombre, "Tierra");
+        this.#defensa = 50; 
+    }
+
+    get defensa() { return this.#defensa; }
+
+    set defensa(valor) {
+        if (valor > 100) {
+            this.#defensa = 100;
+        } else if (valor < 0) {
+            this.#defensa = 0;
+        } else {
+            this.#defensa = valor;
+        }
     }
 
     descansar() {
@@ -192,6 +206,19 @@ class TamagotchiTierra extends Tamagotchi {
         this.energia = 100;
         this.felicidad = this.felicidad + 10;
         logConsole("🪨 " + this.nombre + " se enraizó profundamente. ¡Energía al máximo!");
+    }
+
+    jugar() {
+        if (this.estadoGeneral === "Muerto 🪦") return;
+        if (this.energia < 20) {
+            logConsole("❌ " + this.nombre + " no tiene suficiente energía para entrenar su defensa.");
+            return;
+        }
+        this.felicidad = this.felicidad + 20;
+        this.energia = this.energia - 20;
+        this.defensa = this.defensa + 15; 
+        this.hambre = this.hambre + 12;
+        logConsole("🛡️ " + this.nombre + " entrenó duro. ¡Su Defensa/Blindaje aumentó!");
     }
 
     alimentar() {
@@ -238,7 +265,6 @@ const imagenesEspecies = {
     "Tierra": "assets/imagenes/Tierra.png"
 };
 
-
 function renderTamagotchis() {
     const contenedor = document.getElementById("zoo-wrapper");
     contenedor.innerHTML = "";
@@ -253,6 +279,17 @@ function renderTamagotchis() {
         const claseElemento = "card-" + t.especie.toLowerCase();
         const badgeElemento = "badge-" + t.especie.toLowerCase();
         const rutaImagen = imagenesEspecies[t.especie];
+
+        // Fila estructurada de forma idéntica 
+        let filaDefensaHTML = "";
+        if (t.especie === "Tierra") {
+            filaDefensaHTML = `
+                <div class="stat-row">
+                    <label>Defensa: <span>${t.defensa}/100</span></label>
+                    <div class="bar-container"><div class="bar bar-defensa" style="width: ${t.defensa}%"></div></div>
+                </div>
+            `;
+        }
 
         contenedor.innerHTML += `
             <div class="tamagotchi-card ${claseElemento}">
@@ -284,6 +321,7 @@ function renderTamagotchis() {
                         <label>Salud: <span>${t.salud}/100</span></label>
                         <div class="bar-container"><div class="bar bar-salud" style="width: ${t.salud}%"></div></div>
                     </div>
+                    ${filaDefensaHTML}
                 </div>
 
                 <div class="actions-panel">
@@ -337,6 +375,7 @@ function pasarTiempo() {
     }
     renderTamagotchis();
 }
+// Simula el ciclo de "vida" cada 5 segundos
 setInterval(pasarTiempo, 5000);
 
 // 6. ADOPTAR Y ELIMINAR
@@ -486,6 +525,7 @@ function ejecutarDuelo() {
     renderTamagotchis();
 }
 
+// RITUAL CURATIVO
 function ejecutarRitual() {
     let sanador = null;
 
@@ -534,6 +574,7 @@ function ejecutarRitual() {
     renderTamagotchis();
 }
 
+// CARRERA
 function ejecutarCarrera() {
     if (listaTamagotchis.length < 2) {
         logConsole("❌ Se necesitan al menos 2 criaturas para organizar una carrera.");

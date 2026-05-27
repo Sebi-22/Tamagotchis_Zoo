@@ -45,16 +45,10 @@ header .subtitle {
   padding: 20px;
   border: 2px solid #475569;
   text-align: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.tamagotchi-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.card-fuego  { border-color: #f97316; }
-.card-agua   { border-color: #38bdf8; }
+.card-fuego   { border-color: #f97316; }
+.card-agua    { border-color: #38bdf8; }
 .card-tierra { border-color: #4ade80; }
 
 .card-header {
@@ -111,17 +105,18 @@ header .subtitle {
 .stats-panel {
   background-color: #0f172a;
   border-radius: 10px;
-  padding: 12px;
+  padding: 15px;            
   margin-bottom: 15px;
   text-align: left;
+  height: 180px;             
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
 }
 
 .stat-row {
-  margin-bottom: 10px;
-}
-
-.stat-row:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0;          
+  width: 100%;
 }
 
 .stat-row label {
@@ -136,7 +131,7 @@ header .subtitle {
   background-color: #475569;
   border-radius: 5px;
   height: 10px;
-  width: 100%;
+  width: 100%;            
 }
 
 .bar {
@@ -150,6 +145,11 @@ header .subtitle {
 .bar-energia   { background-color: #fbbf24; }
 .bar-felicidad { background-color: #38bdf8; }
 .bar-salud     { background-color: #22c55e; }
+
+/* Color gris azulado para la Defensa, ahora alineada con el contenedor */
+.bar-defensa   { 
+  background-color: #94a3b8; 
+}
 
 /* 7. BOTONES DE ACCIÓN EN LA CARD */
 .actions-panel {
@@ -318,8 +318,8 @@ body.modo-noche {
   color: #000000;
 }
 
-.btn-fuego-select  { background-color: #f97316; }
-.btn-agua-select   { background-color: #38bdf8; }
+.btn-fuego-select   { background-color: #f97316; }
+.btn-agua-select    { background-color: #38bdf8; }
 .btn-tierra-select { background-color: #4ade80; }
 
 .btn-cancelar {
@@ -336,14 +336,12 @@ body.modo-noche {
 }
 
 /* 10. RESPONSIVE */
-/* Tablets (601px – 900px)*/
 @media (min-width: 601px) and (max-width: 900px) {
   .zoo-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Celulares (hasta 600px)*/
 @media (max-width: 600px) {
   body {
     padding: 12px;
